@@ -195,4 +195,11 @@
 	<icon path="art/icons/icon32.png" size='32'/>
 	<icon path="art/icons/icon64.png" size='64'/>
 	<icon path="art/icons/iconOG.png" />
+
+    <!-- _________________________________ MODCHART _______________________________ -->
+	<haxedef name="FM_ENGINE" value="PSYCH"/>
+	<haxedef name="FM_ENGINE_VERSION" value="1.0"/>
+
+	<haxelib name="funkin-modchart" />
+	<haxeflag name="--macro" value="modchart.backend.macros.Macro.includeFiles()"/>
 </project>
