@@ -5,6 +5,8 @@ import cutscenes.CutsceneHandler;
 import substates.GameOverSubstate;
 import objects.Character;
 
+import animate.FlxAnimate;
+
 class Tank extends BaseStage
 {
 	var tankWatchtower:BGSprite;
@@ -145,7 +147,7 @@ class Tank extends BaseStage
 		//inCutscene = true; //this would stop the camera movement, oops
 
 		tankman = new FlxAnimate(dad.x - 30, dad.y - 20);
-		tankman.frames = FlxAnimateFrames.fromAnimate(Paths.getFolderPath('images/cutscenes/tankman', 'week7'));
+		tankman.frames = Paths.getAnimateAtlas('cutscenes/tankman', 'week7');
 		tankman.antialiasing = ClientPrefs.data.antialiasing;
 		addBehindDad(tankman);
 		cutsceneHandler.push(tankman);
@@ -291,8 +293,8 @@ class Tank extends BaseStage
 		});
 		Paths.sound('stressCutscene');
 
-		pico = new FlxAnimate(gf.x, gf.y);
-		pico.frames = FlxAnimateFrames.fromAnimate(Paths.getFolderPath('images/cutscenes/picoAppears', 'week7'));
+		pico = new FlxAnimate(gf.x - 60, gf.y + 150);
+		pico.frames = Paths.getAnimateAtlas('cutscenes/picoAppears', 'week7');
 		pico.antialiasing = ClientPrefs.data.antialiasing;
 		pico.anim.addBySymbol('dance', 'GF Dancing at Gunpoint', 24, true);
 		pico.anim.addBySymbol('dieBitch', 'GF Time to Die sequence', 24, false);
@@ -323,11 +325,10 @@ class Tank extends BaseStage
 				case "picoEnd", "Pico Dual Wield on Speaker idle":
 					gfGroup.alpha = 1;
 					pico.visible = false;
-					// if (pico.anim.onComplete.has(picoStressCycle)) // for safety
-						// pico.anim.onComplete.remove(picoStressCycle);
+					pico.animation.finishCallback = null;
 			}
 		}
-		// pico.anim.onComplete.add(picoStressCycle);
+		pico.animation.finishCallback = function(_) picoStressCycle();
 
 		boyfriendCutscene = new FlxSprite(boyfriend.x + 5, boyfriend.y + 20);
 		boyfriendCutscene.antialiasing = ClientPrefs.data.antialiasing;

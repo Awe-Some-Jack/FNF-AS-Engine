@@ -6,6 +6,8 @@ import openfl.utils.AssetType;
 import openfl.utils.Assets;
 import haxe.Json;
 import backend.Song;
+import states.stages.objects.TankmenBG;
+
 import animate.FlxAnimate;
 import animate.FlxAnimateFrames;
 
@@ -268,15 +270,13 @@ class Character extends FlxAnimate
 				if (animationNotes.length > 0 && Conductor.songPosition > animationNotes[0][0])
 				{
 					var noteData:Int = 1;
-					if (animationNotes[0][1] > 2)
-						noteData = 3;
+					if (animationNotes[0][1] > 2) noteData = 3;
 
 					noteData += FlxG.random.int(0, 1);
 					playAnim('shoot' + noteData, true);
 					animationNotes.shift();
 				}
-				if (isAnimationFinished())
-					playAnim(getAnimationName(), false, false, anim.curAnim.frames.length - 3);
+				if (isAnimationFinished()) playAnim(getAnimationName(), false, false, anim.curAnim.frames.length - 3);
 		}
 
 		if (getAnimationName().startsWith('sing'))
@@ -407,10 +407,16 @@ class Character extends FlxAnimate
 	{
 		try
 		{
+			var songData:SwagSong = Song.getChart('picospeaker', Paths.formatToSongPath(Song.loadedSongName));
+			if(songData != null)
+				for (section in songData.notes)
+					for (songNotes in section.sectionNotes)
+						animationNotes.push(songNotes);
+
+			TankmenBG.animationNotes = animationNotes;
+			animationNotes.sort(sortAnims);
 		}
-		catch (e:Dynamic)
-		{
-		}
+		catch(e:Dynamic) {}
 	}
 
 	function sortAnims(Obj1:Array<Dynamic>, Obj2:Array<Dynamic>):Int

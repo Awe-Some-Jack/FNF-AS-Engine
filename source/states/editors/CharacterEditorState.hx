@@ -1,8 +1,8 @@
 package states.editors;
 
 import flixel.graphics.FlxGraphic;
+import openfl.display.BitmapData;
 
-import flixel.system.debug.interaction.tools.Pointer.GraphicCursorCross;
 import flixel.util.FlxDestroyUtil;
 
 import openfl.net.FileReference;
@@ -18,6 +18,13 @@ import states.editors.content.Prompt;
 import states.editors.content.PsychJsonPrinter;
 import animate.FlxAnimate;
 import animate.FlxAnimateFrames;
+
+#if (flixel < "6.0.0")
+import flixel.system.debug.interaction.tools.Pointer.GraphicCursorCross;
+#else
+@:bitmap("assets/images/debugger/cursorCross.png")
+class GraphicCursorCross extends BitmapData {}
+#end
 
 class CharacterEditorState extends MusicBeatState implements PsychUIEventHandler.PsychUIEvent
 {
