@@ -347,6 +347,9 @@ class LuaUtils
 			case 'sparrow', 'sparrowatlas', 'sparrowv2':
 				spr.frames = Paths.getSparrowAtlas(image);
 
+			case 'animateatlas':
+				spr.frames = Paths.getAnimateAtlas(image);
+
 			default:
 				spr.frames = Paths.getAtlas(image);
 		}

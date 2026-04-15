@@ -12,7 +12,7 @@ import openfl.utils.AssetType;
 import openfl.utils.Assets as OpenFlAssets;
 import openfl.system.System;
 import openfl.geom.Rectangle;
-
+import animate.FlxAnimateFrames;
 import lime.utils.Assets;
 import flash.media.Sound;
 
@@ -204,6 +204,9 @@ class Paths
 		#end
 		return 'assets/videos/$key.$VIDEO_EXT';
 	}
+
+	inline static public function modsAnimateAtlas(key:String)
+		return modFolders('images/' + key);
 
 	inline static public function sound(key:String, ?modsAllowed:Bool = true):Sound
 		return returnSound('sounds/$key', modsAllowed);
@@ -411,6 +414,36 @@ class Paths
 		#else
 		return FlxAtlasFrames.fromTexturePackerJson(imageLoaded, getPath(Language.getFileTranslation('images/$key') + '.json', TEXT, parentFolder));
 		#end
+	}
+
+	public static function getAnimateAtlas(key:String, ?library:String, ?settings:FlxAnimateSettings):FlxAnimateFrames
+	{
+		var assetLibrary:String = library ?? "";
+		var graphicKey:String = "";
+
+		if (assetLibrary != "")
+		{
+			graphicKey = modsAnimateAtlas(key);
+		}
+		else
+		{
+			graphicKey = modsAnimateAtlas(key);
+		}
+
+		var validatedSettings:FlxAnimateSettings =
+			{
+			swfMode: settings?.swfMode ?? false,
+			cacheOnLoad: settings?.cacheOnLoad ?? false,
+			filterQuality: settings?.filterQuality ?? MEDIUM,
+			onSymbolCreate: settings?.onSymbolCreate ?? null,
+			};
+		// Validate asset path.
+		if (!FileSystem.exists('${graphicKey}/Animation.json'))
+		{
+			throw 'No Animation.json file exists at the specified path (${graphicKey})';
+		}
+
+		return FlxAnimateFrames.fromAnimate(graphicKey);
 	}
 
 	inline static public function formatToSongPath(path:String) {
