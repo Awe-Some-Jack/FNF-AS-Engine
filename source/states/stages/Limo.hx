@@ -50,7 +50,7 @@ class Limo extends BaseStage
 
 			for (i in 0...5)
 			{
-				var dancer:BackgroundDancer = new BackgroundDancer((370 * i) + dancersDiff + bgLimo.x, bgLimo.y - 400);
+				var dancer:BackgroundDancer = new BackgroundDancer((310 * i) + dancersDiff + bgLimo.x, bgLimo.y - 380);
 				dancer.scrollFactor.set(0.4, 0.4);
 				grpLimoDancers.add(dancer);
 			}
@@ -212,7 +212,7 @@ class Limo extends BaseStage
 	{
 		var dancers:Array<BackgroundDancer> = grpLimoDancers.members;
 		for (i in 0...dancers.length) {
-			dancers[i].x = (370 * i) + dancersDiff + bgLimo.x;
+			dancers[i].x = (310 * i) + dancersDiff + bgLimo.x;
 		}
 	}
 	
