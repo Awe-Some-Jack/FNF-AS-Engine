@@ -293,7 +293,7 @@ class Tank extends BaseStage
 		});
 		Paths.sound('stressCutscene');
 
-		pico = new FlxAnimate(gf.x - 60, gf.y + 150);
+		pico = new FlxAnimate(gf.x - 120, gf.y + 130);
 		pico.frames = Paths.getAnimateAtlas('cutscenes/picoAppears', 'week7');
 		pico.antialiasing = ClientPrefs.data.antialiasing;
 		pico.anim.addBySymbol('dance', 'GF Dancing at Gunpoint', 24, true);
@@ -304,11 +304,26 @@ class Tank extends BaseStage
 		addBehindGF(pico);
 		cutsceneHandler.push(pico);
 
+		var picoOffsets:Map<String, Array<Float>> = [
+            'dance'       => [0, 0],
+            'dieBitch'    => [230, 470],
+            'picoAppears' => [730, 384],
+            'picoEnd'     => [-118, 6]
+        ];
+
+		function picoPlayAnim(name:String, force:Bool = true) {
+            pico.anim.play(name, force);
+            if (picoOffsets.exists(name)) {
+                var off = picoOffsets[name];
+                pico.offset.set(off[0], off[1]);
+            }
+        }
+
 		// prepare pico animation cycle
 		function picoStressCycle() {
 			switch (pico.animation.curAnim.name) {
 				case "dieBitch", "GF Time to Die sequence":
-					pico.anim.play('picoAppears', true);
+					picoPlayAnim('picoAppears');
 					boyfriendGroup.alpha = 1;
 					boyfriendCutscene.visible = false;
 					boyfriend.playAnim('bfCatch', true);
@@ -321,7 +336,7 @@ class Tank extends BaseStage
 						}
 					};
 				case "picoAppears", "Pico Saves them sequence":
-					pico.anim.play('picoEnd', true);
+					picoPlayAnim('picoEnd');
 				case "picoEnd", "Pico Dual Wield on Speaker idle":
 					gfGroup.alpha = 1;
 					pico.visible = false;
@@ -342,9 +357,22 @@ class Tank extends BaseStage
 		var cutsceneSnd:FlxSound = new FlxSound().loadEmbedded(Paths.sound('stressCutscene'));
 		FlxG.sound.list.add(cutsceneSnd);
 
+		var tankmanOffsets:Map<String, Array<Float>> = [
+            'godEffingDamnIt'       => [45, 25],
+            'lookWhoItIs'    => [-5, 10],
+        ];
+
+		function tankmanPlayAnim(name:String, force:Bool = true) {
+            tankman.anim.play(name, force);
+            if (tankmanOffsets.exists(name)) {
+                var off = tankmanOffsets[name];
+                tankman.offset.set(off[0], off[1]);
+            }
+        }
+
 		tankman.anim.addBySymbol('godEffingDamnIt', 'TANK TALK 3 P1 UNCUT', 24, false);
 		tankman.anim.addBySymbol('lookWhoItIs', 'TANK TALK 3 P2 UNCUT', 24, false);
-		tankman.anim.play('godEffingDamnIt', true);
+		tankmanPlayAnim('godEffingDamnIt');
 
 		cutsceneHandler.onStart = function()
 		{
@@ -356,7 +384,7 @@ class Tank extends BaseStage
 		{
 			FlxTween.tween(camFollow, {x: 650, y: 300}, 1, {ease: FlxEase.sineOut});
 			FlxTween.tween(FlxG.camera, {zoom: 0.9 * 1.2 * 1.2}, 2.25, {ease: FlxEase.quadInOut});
-			pico.anim.play('dieBitch', true);
+			picoPlayAnim('dieBitch');
 		});
 
 		cutsceneHandler.timer(17.5, function()
@@ -366,7 +394,7 @@ class Tank extends BaseStage
 
 		cutsceneHandler.timer(19.5, function()
 		{
-			tankman.anim.play('lookWhoItIs', true);
+			tankmanPlayAnim("lookWhoItIs");
 		});
 
 		cutsceneHandler.timer(20, function()
