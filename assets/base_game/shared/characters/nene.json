@@ -6,7 +6,7 @@
 			"fps": 24,
 			"anim": "danceLeft",
 			"loop": false,
-			"name": "Idle"
+			"name": "Nene Idle"
 		},
 		{
 			"offsets": [0, 0],
@@ -14,7 +14,7 @@
 			"fps": 24,
 			"anim": "danceRight",
 			"loop": false,
-			"name": "Idle"
+			"name": "Nene Idle"
 		},
 		{
 			"offsets": [-119, 55],
@@ -22,7 +22,7 @@
 			"fps": 24,
 			"anim": "combo50",
 			"loop": false,
-			"name": "ComboCheer"
+			"name": "combo celebration 1 nene"
 		},
 		{
 			"offsets": [17, -5],
@@ -30,7 +30,7 @@
 			"fps": 24,
 			"anim": "laughCutscene",
 			"loop": false,
-			"name": "Laugh0"
+			"name": "laughing nene"
 		},
 		{
 			"offsets": [-41, -15],
@@ -38,31 +38,31 @@
 			"fps": 24,
 			"anim": "combo100",
 			"loop": false,
-			"name": "ComboFawn0"
+			"name": "fawn nene"
 		},
 		{
-			"offsets": [0, 52],
+			"offsets": [1, 52],
 			"indices": [],
 			"fps": 24,
 			"anim": "raiseKnife",
 			"loop": false,
-			"name": "KnifeRaise0"
+			"name": "knife raise"
 		},
 		{
-			"offsets": [-99, 52],
+			"offsets": [-98, 52],
 			"indices": [],
 			"fps": 24,
 			"anim": "idleKnife",
 			"loop": false,
-			"name": "KnifeIdle0"
+			"name": "knife high held"
 		},
 		{
-			"offsets": [134, 52],
+			"offsets": [-38, 51],
 			"indices": [],
 			"fps": 24,
 			"anim": "lowerKnife",
 			"loop": false,
-			"name": "KnifeLower0"
+			"name": "knife lower"
 		}
 	],
 	"vocals_file": "",
