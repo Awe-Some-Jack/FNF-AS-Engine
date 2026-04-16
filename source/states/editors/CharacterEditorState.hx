@@ -781,7 +781,7 @@ class CharacterEditorState extends MusicBeatState implements PsychUIEventHandler
 		{
 			try
 			{
-				character.frames = FlxAnimateFrames.fromAnimate(Paths.getPath('images/' +  character.imageFile));
+				character.frames = Paths.getAnimateAtlas(character.imageFile);
 			}
 			catch(e:Dynamic)
 			{
