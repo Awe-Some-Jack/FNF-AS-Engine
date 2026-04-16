@@ -1,76 +1,76 @@
 {
 	"animations": [
 		{
+			"loop": false,
 			"offsets": [0, 0],
-			"loop": false,
+			"fps": 24,
 			"anim": "idle",
-			"fps": 24,
-			"name": "Pico Idle Dance",
-			"indices": []
+			"indices": [],
+			"name": "Pico Idle Dance"
 		},
 		{
-			"offsets": [65, 9],
 			"loop": false,
+			"offsets": [59, 1],
+			"fps": 24,
 			"anim": "singLEFT",
-			"fps": 24,
-			"name": "Pico Note Right0",
-			"indices": []
+			"indices": [],
+			"name": "Pico Note Right0"
 		},
 		{
-			"offsets": [-68, -7],
 			"loop": false,
+			"offsets": [-83, -11],
+			"fps": 24,
 			"anim": "singRIGHT",
-			"fps": 24,
-			"name": "Pico NOTE LEFT0",
-			"indices": []
+			"indices": [],
+			"name": "Pico NOTE LEFT0"
 		},
 		{
-			"offsets": [-60, 41],
 			"loop": false,
+			"offsets": [-76, 24],
+			"fps": 24,
 			"anim": "singRIGHTmiss",
-			"fps": 24,
-			"name": "Pico NOTE LEFT miss",
-			"indices": []
+			"indices": [],
+			"name": "Pico NOTE LEFT miss"
 		},
 		{
-			"offsets": [62, 64],
 			"loop": false,
+			"offsets": [58, 46],
+			"fps": 24,
 			"anim": "singLEFTmiss",
-			"fps": 24,
-			"name": "Pico Note Right Miss",
-			"indices": []
+			"indices": [],
+			"name": "Pico Note Right Miss"
 		},
 		{
-			"offsets": [-29, 27],
 			"loop": false,
+			"offsets": [-38, 27],
+			"fps": 24,
 			"anim": "singUP",
-			"fps": 24,
-			"name": "pico Up note0",
-			"indices": []
+			"indices": [],
+			"name": "pico Up note0"
 		},
 		{
-			"offsets": [200, -70],
 			"loop": false,
+			"offsets": [195, -77],
+			"fps": 24,
 			"anim": "singDOWN",
-			"fps": 24,
-			"name": "Pico Down Note0",
-			"indices": []
+			"indices": [],
+			"name": "Pico Down Note0"
 		},
 		{
-			"offsets": [210, -28],
 			"loop": false,
+			"offsets": [197, -34],
+			"fps": 24,
 			"anim": "singDOWNmiss",
-			"fps": 24,
-			"name": "Pico Down Note MISS",
-			"indices": []
+			"indices": [],
+			"name": "Pico Down Note MISS"
 		},
 		{
-			"offsets": [-19, 67],
 			"loop": false,
-			"anim": "singUPmiss",
+			"offsets": [-28, 64],
 			"fps": 24,
-			"name": "pico Up note miss",
-			"indices": []
+			"anim": "singUPmiss",
+			"indices": [],
+			"name": "pico Up note miss"
 		}
 	],
 	"vocals_file": "",

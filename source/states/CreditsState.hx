@@ -43,6 +43,7 @@ class CreditsState extends MusicBeatState
 			[""],
 			["AS Engine Special Thanks"],
 			["ItzJiggzy",		"jiggzy",		"SoundTray Base Game Script",					"https://twitter.com/Ramiro0045_Art",	"FF5E00"],
+			["theoo-h",		"",		"Creator of Funkin Modchart",					"https://github.com/theoo-h",	"C5C8CE"],
 			[""],
 			["Psych Engine Team"],
 			["Shadow Mario",		"shadowmario",		"Main Programmer and Head of Psych Engine",					"https://ko-fi.com/shadowmario",	"444444"],
