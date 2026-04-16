@@ -358,7 +358,7 @@ class Tank extends BaseStage
 		FlxG.sound.list.add(cutsceneSnd);
 
 		var tankmanOffsets:Map<String, Array<Float>> = [
-            'godEffingDamnIt'       => [54, 25],
+            'godEffingDamnIt'       => [57, 25],
             'lookWhoItIs'    => [-5, 16],
         ];
 
