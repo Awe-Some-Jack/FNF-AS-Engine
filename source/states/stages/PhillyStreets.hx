@@ -436,7 +436,7 @@ class PhillyStreets extends BaseStage
 		function createCan()
 		{
 			if(didCreateCan) return;
-			spraycan = new SpraycanAtlasSprite(spraycanPile.x - 50, spraycanPile.y - 870);
+			spraycan = new SpraycanAtlasSprite(spraycanPile.x - 55, spraycanPile.y - 880);
 			add(spraycan);
 
 			lightCanSnd = new FlxSound();
