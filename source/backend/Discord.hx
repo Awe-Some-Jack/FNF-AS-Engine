@@ -145,7 +145,7 @@ class DiscordClient
 	public static function loadModRPC()
 	{
 		var pack:Dynamic = Mods.getPack();
-		if(pack != null && pack.discordRPC != null && pack.discordRPC != clientID)
+		if (pack != null && pack.customRPC && pack.discordRPC != null && pack.discordRPC != clientID)
 		{
 			clientID = pack.discordRPC;
 			//trace('Changing clientID! $clientID, $_defaultID');
