@@ -2205,6 +2205,7 @@ class PlayState extends MusicBeatState
 							boyfriend = boyfriendMap.get(value2);
 							boyfriend.alpha = lastAlpha;
 							iconP1.changeIcon(boyfriend.healthIcon);
+							health = health;
 						}
 						setOnScripts('boyfriendName', boyfriend.curCharacter);
 
@@ -2227,6 +2228,7 @@ class PlayState extends MusicBeatState
 							}
 							dad.alpha = lastAlpha;
 							iconP2.changeIcon(dad.healthIcon);
+							health = health;
 						}
 						setOnScripts('dadName', dad.curCharacter);
 
