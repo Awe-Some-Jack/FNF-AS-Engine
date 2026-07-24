@@ -213,9 +213,9 @@ class Character extends FlxAnimate
 				else
 				{
 					if (animIndices != null && animIndices.length > 0)
-						anim.addBySymbolIndices(animAnim, animName, animIndices, animFps, animLoop);
+						anim.addByFrameLabelIndices(animAnim, animName, animIndices, animFps, animLoop);
 					else
-						anim.addBySymbol(animAnim, animName, animFps, animLoop);
+						anim.addByFrameLabel(animAnim, animName, animFps, animLoop);
 				}
 
 				if (shits.offsets != null && shits.offsets.length > 1)

@@ -294,9 +294,9 @@ class CharacterEditorState extends MusicBeatState implements PsychUIEventHandler
 				}else{
 					ghost.frames = FlxAnimateFrames.fromAnimate(Paths.getPath('images/' + character.imageFile));
 					if(myAnim.indices != null && myAnim.indices.length > 0)
-						ghost.anim.addBySymbolIndices('anim', myAnim.name, myAnim.indices, 0, false);
+						ghost.anim.addByFrameLabelIndices('anim', myAnim.name, myAnim.indices, 0, false);
 					else
-						ghost.anim.addBySymbol('anim', myAnim.name, 0, false);
+						ghost.anim.addByFrameLabel('anim', myAnim.name, 0, false);
 
 					ghost.anim.play('anim', true, false);
 				}
@@ -1166,9 +1166,9 @@ class CharacterEditorState extends MusicBeatState implements PsychUIEventHandler
 		else
 		{
 			if(indices != null && indices.length > 0)
-			    character.anim.addBySymbolIndices(anim, name, indices, fps, loop);
+			    character.anim.addByFrameLabelIndices(anim, name, indices, fps, loop);
 			else
-				character.anim.addBySymbol(anim, name, fps, loop);
+				character.anim.addByFrameLabel(anim, name, fps, loop);
 		}
 
 		if(!character.hasAnimation(anim))
