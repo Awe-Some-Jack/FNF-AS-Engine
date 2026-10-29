@@ -298,7 +298,7 @@ class CharacterEditorState extends MusicBeatState implements PsychUIEventHandler
 					else
 						ghost.anim.addByFrameLabel('anim', myAnim.name, 0, false);
 
-					ghost.anim.play('anim', true, false);
+					ghost.anim.play('anim', true, false, character.animation.curAnim.curFrame);
 				}
 
 				ghost.anim.pause();
