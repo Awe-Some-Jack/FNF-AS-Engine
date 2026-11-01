@@ -1,0 +1,175 @@
+{
+	"animations": [
+		{
+			"offsets": [0, 0],
+			"indices": [],
+			"fps": 24,
+			"anim": "idle",
+			"loop": true,
+			"name": "Idle"
+		},
+		{
+			"offsets": [0, 0],
+			"indices": [],
+			"fps": 24,
+			"anim": "block",
+			"loop": false,
+			"name": "Block"
+		},
+		{
+			"offsets": [0, 0],
+			"indices": [],
+			"fps": 24,
+			"anim": "dodge",
+			"loop": false,
+			"name": "Dodge"
+		},
+		{
+			"offsets": [0, 0],
+			"indices": [],
+			"fps": 24,
+			"anim": "punchHigh1",
+			"loop": false,
+			"name": "Punch High 1"
+		},
+		{
+			"offsets": [0, 0],
+			"indices": [],
+			"fps": 24,
+			"anim": "punchHigh2",
+			"loop": false,
+			"name": "Punch High 2"
+		},
+		{
+			"offsets": [0, 0],
+			"indices": [],
+			"fps": 24,
+			"anim": "punchLow1",
+			"loop": false,
+			"name": "Punch Low 1"
+		},
+		{
+			"offsets": [0, 0],
+			"indices": [],
+			"fps": 24,
+			"anim": "punchLow2",
+			"loop": false,
+			"name": "Punch Low 2"
+		},
+		{
+			"offsets": [0, 0],
+			"indices": [],
+			"fps": 24,
+			"anim": "hitLow",
+			"loop": false,
+			"name": "Hit Low"
+		},
+		{
+			"offsets": [0, 0],
+			"indices": [],
+			"fps": 24,
+			"anim": "hitHigh",
+			"loop": false,
+			"name": "Hit High"
+		},
+		{
+			"offsets": [0, 0],
+			"indices": [],
+			"fps": 24,
+			"anim": "uppercutHit",
+			"loop": false,
+			"name": "Uppercut Hit"
+		},
+		{
+			"offsets": [0, 0],
+			"indices": [],
+			"fps": 24,
+			"anim": "fakeout",
+			"loop": false,
+			"name": "Fake Hit"
+		},
+		{
+			"offsets": [0, 0],
+			"indices": [],
+			"fps": 24,
+			"anim": "taunt",
+			"loop": false,
+			"name": "Taunt"
+		},
+		{
+			"offsets": [0, 0],
+			"indices": [],
+			"fps": 24,
+			"anim": "taunt-loop",
+			"loop": true,
+			"name": "Taunt Laugh Loop"
+		},
+		{
+			"offsets": [0, 0],
+			"indices": [],
+			"fps": 24,
+			"anim": "uppercutPrep",
+			"loop": false,
+			"name": "Uppercut Prep"
+		},
+		{
+			"offsets": [0, 0],
+			"indices": [],
+			"fps": 24,
+			"anim": "uppercut",
+			"loop": false,
+			"name": "Uppercut Punch"
+		},
+		{
+			"offsets": [0, 0],
+			"indices": [],
+			"fps": 24,
+			"anim": "uppercut-loop",
+			"loop": true,
+			"name": "Uppercut Punch Loop"
+		},
+		{
+			"offsets": [0, 0],
+			"indices": [],
+			"fps": 24,
+			"anim": "hitSpin",
+			"loop": true,
+			"name": "Hit Spin"
+		},
+		{
+			"offsets": [100, 600],
+			"indices": [],
+			"fps": 24,
+			"anim": "firstDeath",
+			"loop": false,
+			"name": "Low Death Intro"
+		},
+		{
+			"offsets": [100, 600],
+			"indices": [],
+			"fps": 24,
+			"anim": "deathLoop",
+			"loop": true,
+			"name": "Low Death Loop"
+		},
+		{
+			"offsets": [100, 600],
+			"indices": [],
+			"fps": 24,
+			"anim": "deathConfirm",
+			"loop": false,
+			"name": "Low Death Confirm"
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": false,
+	"image": "characters/picoBlazin",
+	"position": [-750, 60],
+	"healthicon": "pico",
+	"flip_x": true,
+	"healthbar_colors": [183, 216, 85],
+	"camera_position": [0, -360],
+	"sing_duration": 999,
+	"scale": 1.75,
+	"_editor_isPlayer": true
+}
