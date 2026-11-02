@@ -22,6 +22,7 @@ class GameOverSubstate extends MusicBeatSubstate
 	public static var loopSoundName:String = 'gameOver';
 	public static var endSoundName:String = 'gameOverEnd';
 	public static var deathDelay:Float = 0;
+	public static var deathTimer:Float = 0.7;
 
 	public static var instance:GameOverSubstate;
 	public function new(?playStateBoyfriend:Character = null)
@@ -229,7 +230,7 @@ class GameOverSubstate extends MusicBeatSubstate
 			}
 			FlxG.sound.music.stop();
 			FlxG.sound.play(Paths.music(endSoundName));
-			new FlxTimer().start(0.7, function(tmr:FlxTimer)
+			new FlxTimer().start(deathTimer, function(tmr:FlxTimer)
 			{
 				FlxG.camera.fade(FlxColor.BLACK, 2, false, function()
 				{
