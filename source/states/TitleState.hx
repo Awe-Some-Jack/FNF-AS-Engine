@@ -18,6 +18,8 @@ import shaders.ColorSwap;
 import states.StoryMenuState;
 import states.MainMenuState;
 
+import hxwindowmode.WindowColorMode;
+
 typedef TitleData =
 {
 	var titlex:Float;
