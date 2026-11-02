@@ -5,6 +5,8 @@ import objects.StrumNote;
 import objects.NoteSplash;
 import objects.Alphabet;
 
+import hxwindowmode.WindowColorMode;
+
 class VisualsSettingsSubState extends BaseOptionsMenu
 {
 	var noteOptionID:Int = -1;
@@ -160,6 +162,16 @@ class VisualsSettingsSubState extends BaseOptionsMenu
 			BOOL);
 		addOption(option);
 
+		#if (windows)
+		var option:Option = new Option('Window Colors:',
+			"Seleted Your Window Colors",
+			'windowColors',
+			STRING,
+			['Light', 'Dark']);
+		addOption(option);
+		option.onChange = onChangeWindowColors;
+		#end
+
 		super();
 		add(notes);
 		add(splashes);
@@ -235,6 +247,17 @@ class VisualsSettingsSubState extends BaseOptionsMenu
 			splash.loadSplash(skin);
 
 		playNoteSplashes();
+	}
+
+	function onChangeWindowColors()
+	{
+		if(ClientPrefs.data.pauseMusic == 'Dark')
+			WindowColorMode.setDarkMode();
+		else
+			WindowColorMode.setLightMode();
+
+		if(WindowColorMode.isWindows10)
+			WindowColorMode.redrawWindowHeader();
 	}
 
 	function playNoteSplashes()

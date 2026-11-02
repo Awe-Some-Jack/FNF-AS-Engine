@@ -89,6 +89,16 @@ class TitleState extends MusicBeatState
 			persistentDraw = true;
 		}
 
+		#if (cpp && windows)
+		if(ClientPrefs.data.pauseMusic == 'Dark')
+			WindowColorMode.setDarkMode();
+		else
+			WindowColorMode.setLightMode();
+
+		if(WindowColorMode.isWindows10)
+			WindowColorMode.redrawWindowHeader();
+		#end
+
 		if (FlxG.save.data.weekCompleted != null)
 		{
 			StoryMenuState.weekCompleted = FlxG.save.data.weekCompleted;
