@@ -189,6 +189,8 @@
 
 	<haxedef name="hscriptPos" if="HSCRIPT_ALLOWED" />
 
+	<haxedef name="HXCPP_FAST_LINK" unless="debug || HXCPP_OPTIMIZE_LINK"/>
+
 	<!-- _________________________________ Custom _______________________________ -->
 
 	<assets path='art/icons/iconOG.png' rename='icon.png' if="linux || mac" />
