@@ -251,7 +251,7 @@ class VisualsSettingsSubState extends BaseOptionsMenu
 
 	function onChangeWindowColors()
 	{
-		if(ClientPrefs.data.pauseMusic == 'Dark')
+		if(ClientPrefs.data.windowColors == 'Dark')
 			WindowColorMode.setDarkMode();
 		else
 			WindowColorMode.setLightMode();
