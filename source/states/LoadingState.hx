@@ -399,11 +399,14 @@ class LoadingState extends MusicBeatState
 	static var soundsToPrepare:Array<String> = [];
 	static var musicToPrepare:Array<String> = [];
 	static var songsToPrepare:Array<String> = [];
-	public static function prepare(images:Array<String> = null, sounds:Array<String> = null, music:Array<String> = null)
+	static var scriptsToPrepare:Array<String> = [];
+	public static var preloadedScripts:Map<String, String> = [];
+	public static function prepare(images:Array<String> = null, sounds:Array<String> = null, music:Array<String> = null, scripts:Array<String> = null)
 	{
 		if (images != null) imagesToPrepare = imagesToPrepare.concat(images);
 		if (sounds != null) soundsToPrepare = soundsToPrepare.concat(sounds);
 		if (music != null) musicToPrepare = musicToPrepare.concat(music);
+		if (scripts != null) scriptsToPrepare = scriptsToPrepare.concat(scripts);
 	}
 
 	static var initialThreadCompleted:Bool = true;
@@ -427,6 +430,8 @@ class LoadingState extends MusicBeatState
 			soundsToPrepare = [];
 			musicToPrepare = [];
 			songsToPrepare = [];
+			scriptsToPrepare = [];
+			preloadedScripts = [];
 			loaded = 0;
 			loadMax = 0;
 			initialThreadCompleted = true;
@@ -439,6 +444,8 @@ class LoadingState extends MusicBeatState
 		soundsToPrepare = [];
 		musicToPrepare = [];
 		songsToPrepare = [];
+		scriptsToPrepare = [];
+		preloadedScripts = [];
 
 		initialThreadCompleted = false;
 		var threadsCompleted:Int = 0;
@@ -490,6 +497,7 @@ class LoadingState extends MusicBeatState
 					var imgs:Array<String> = [];
 					var snds:Array<String> = [];
 					var mscs:Array<String> = [];
+					var scrs:Array<String> = [];
 					for (asset in Reflect.fields(json))
 					{
 						var filters:Int = Reflect.field(json, asset);
@@ -503,9 +511,11 @@ class LoadingState extends MusicBeatState
 								snds.push(asset.substr('sounds/'.length));
 							else if(asset.startsWith('music/'))
 								mscs.push(asset.substr('music/'.length));
+							else if(asset.endsWith('.hx') || asset.endsWith('.lua'))
+								scrs.push(asset);
 						}
 					}
-					prepare(imgs, snds, mscs);
+					prepare(imgs, snds, mscs, scrs);
 				}
 			}
 			catch(e:Dynamic) {}
@@ -521,6 +531,7 @@ class LoadingState extends MusicBeatState
 				var imgs:Array<String> = [];
 				var snds:Array<String> = [];
 				var mscs:Array<String> = [];
+				var scrs:Array<String> = [];
 				if(stageData.preload != null)
 				{
 					for (asset in Reflect.fields(stageData.preload))
@@ -536,6 +547,8 @@ class LoadingState extends MusicBeatState
 								snds.push(asset.substr('sounds/'.length));
 							else if(asset.startsWith('music/'))
 								mscs.push(asset.substr('music/'.length));
+							else if(asset.endsWith('.hx') || asset.endsWith('.lua'))
+								scrs.push(asset);
 						}
 					}
 				}
@@ -549,10 +562,22 @@ class LoadingState extends MusicBeatState
 								imgs.push(sprite.image);
 					}
 				}
-				prepare(imgs, snds, mscs);
+				prepare(imgs, snds, mscs, scrs);
 			}
 
 			songsToPrepare.push('$folder/Inst');
+
+			scriptsToPrepare.push('stages/${song.stage}.hx');
+			scriptsToPrepare.push('stages/${song.stage}.lua');
+
+			try
+			{
+				for (dir in Mods.directoriesWithFile(Paths.getSharedPath(), 'data/$folder/'))
+					for (file in FileSystem.readDirectory(dir))
+						if (file.endsWith('.hx') || file.endsWith('.lua'))
+							scriptsToPrepare.push('data/$folder/$file');
+			}
+			catch(e:Dynamic) {}
 
 			var player1:String = song.player1;
 			var player2:String = song.player2;
@@ -609,10 +634,24 @@ class LoadingState extends MusicBeatState
 		clearInvalidFrom(soundsToPrepare, 'sounds', '.${Paths.SOUND_EXT}', SOUND);
 		clearInvalidFrom(musicToPrepare, 'music', '.${Paths.SOUND_EXT}', SOUND);
 		clearInvalidFrom(songsToPrepare, 'songs', '.${Paths.SOUND_EXT}', SOUND, 'songs');
+		clearInvalidScripts();
 
 		for (arr in [imagesToPrepare, soundsToPrepare, musicToPrepare, songsToPrepare])
 			while (arr.contains(null))
 				arr.remove(null);
+	}
+
+	static function clearInvalidScripts()
+	{
+		var valid:Array<String> = [];
+		for (script in scriptsToPrepare)
+		{
+			if (script == null) continue;
+			var nam:String = script.trim();
+			if (!valid.contains(nam) && Paths.fileExists(nam, TEXT))
+				valid.push(nam);
+		}
+		scriptsToPrepare = valid;
 	}
 
 	static function clearInvalidFrom(arr:Array<String>, prefix:String, ext:String, type:AssetType, ?parentFolder:String = null)
@@ -660,7 +699,7 @@ class LoadingState extends MusicBeatState
 	public static function startThreads()
 	{
 		mutex = new Mutex();
-		loadMax = imagesToPrepare.length + soundsToPrepare.length + musicToPrepare.length + songsToPrepare.length;
+		loadMax = imagesToPrepare.length + soundsToPrepare.length + musicToPrepare.length + songsToPrepare.length + scriptsToPrepare.length;
 		loaded = 0;
 
 		//then start threads
@@ -673,6 +712,7 @@ class LoadingState extends MusicBeatState
 		for (sound in soundsToPrepare) initThread(() -> preloadSound('sounds/$sound'), 'sound $sound');
 		for (music in musicToPrepare) initThread(() -> preloadSound('music/$music'), 'music $music');
 		for (song in songsToPrepare) initThread(() -> preloadSound(song, 'songs', true, false), 'song $song');
+		for (script in scriptsToPrepare) initThread(() -> preloadScript(script), 'script $script');
 
 		// for images, they get to have their own thread
 		for (image in imagesToPrepare) initThread(() -> preloadGraphic(image), 'image $image');
@@ -760,6 +800,30 @@ class LoadingState extends MusicBeatState
 			trace(e.details());
 		}
 	}
+
+	// thread safe script loader
+	static function preloadScript(key:String):Null<String>
+	{
+		var file:String = Paths.getPath(key, TEXT);
+		if (preloadedScripts.exists(file)) return preloadedScripts.get(file);
+
+		var content:String = null;
+		#if sys
+		if (FileSystem.exists(file)) content = File.getContent(file);
+		else
+		#end
+		if (OpenFlAssets.exists(file, TEXT)) content = OpenFlAssets.getText(file);
+
+		if (content == null) return null;
+
+		mutex.acquire();
+		preloadedScripts.set(file, content);
+		mutex.release();
+		return content;
+	}
+
+	public static inline function getPreloadedScript(file:String):Null<String>
+		return preloadedScripts.get(file);
 
 	// thread safe sound loader
 	static function preloadSound(key:String, ?path:String, ?modsAllowed:Bool = true, ?beepOnNull:Bool = true):Null<Sound>

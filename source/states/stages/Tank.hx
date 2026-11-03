@@ -136,7 +136,7 @@ class Tank extends BaseStage
 	var cutsceneHandler:CutsceneHandler;
 	var tankman:FlxAnimate;
 	var pico:FlxAnimate;
-	var boyfriendCutscene:FlxSprite;
+	var boyfriendCutscene:FlxAnimate;
 	var audioPlaying:FlxSound;
 	function prepareCutscene()
 	{
@@ -146,7 +146,7 @@ class Tank extends BaseStage
 		camHUD.visible = false;
 		//inCutscene = true; //this would stop the camera movement, oops
 
-		tankman = new FlxAnimate(dad.x - 30, dad.y - 20);
+		tankman = new FlxAnimate(dad.x + 50, dad.y + 26);
 		tankman.frames = Paths.getAnimateAtlas('cutscenes/tankman', 'week7');
 		tankman.antialiasing = ClientPrefs.data.antialiasing;
 		addBehindDad(tankman);
@@ -189,7 +189,7 @@ class Tank extends BaseStage
 			FlxG.camera.zoom = defaultCamZoom;
 			startCountdown();
 		};
-		camFollow.setPosition(dad.x + 280, dad.y + 170);
+		camFollow.setPosition(dad.x + 350, dad.y + 210);
 	}
 
 	function ughIntro()
@@ -285,7 +285,7 @@ class Tank extends BaseStage
 		cutsceneHandler.endTime = 35.5;
 		gfGroup.alpha = 0.00001;
 		boyfriendGroup.alpha = 0.00001;
-		camFollow.setPosition(dad.x + 400, dad.y + 170);
+		camFollow.setPosition(dad.x + 480, dad.y + 237);
 		FlxTween.tween(FlxG.camera, {zoom: 0.9 * 1.2}, 1, {ease: FlxEase.quadInOut});
 		foregroundSprites.forEach(function(spr:BGSprite)
 		{
@@ -293,7 +293,7 @@ class Tank extends BaseStage
 		});
 		Paths.sound('stressCutscene');
 
-		pico = new FlxAnimate(gf.x - 120, gf.y + 130);
+		pico = new FlxAnimate(gf.x + 310, gf.y + 140);
 		pico.frames = Paths.getAnimateAtlas('cutscenes/picoAppears', 'week7');
 		pico.antialiasing = ClientPrefs.data.antialiasing;
 		pico.anim.addBySymbol('dance', 'GF Dancing at Gunpoint', 24, true);
@@ -308,7 +308,7 @@ class Tank extends BaseStage
             'dance'       => [0, 0],
             'dieBitch'    => [230, 470],
             'picoAppears' => [730, 384],
-            'picoEnd'     => [-118, 6]
+            'picoEnd'     => [-120, 5]
         ];
 
 		function picoPlayAnim(name:String, force:Bool = true) {
@@ -345,11 +345,11 @@ class Tank extends BaseStage
 		}
 		pico.animation.finishCallback = function(_) picoStressCycle();
 
-		boyfriendCutscene = new FlxSprite(boyfriend.x + 5, boyfriend.y + 20);
+		boyfriendCutscene = new FlxAnimate(boyfriend.x - 290, boyfriend.y - 287);
 		boyfriendCutscene.antialiasing = ClientPrefs.data.antialiasing;
-		boyfriendCutscene.frames = Paths.getSparrowAtlas('characters/BOYFRIEND');
-		boyfriendCutscene.animation.addByPrefix('idle', 'BF idle dance', 24, false);
-		boyfriendCutscene.animation.play('idle', true);
+		boyfriendCutscene.frames = Paths.getAnimateAtlas('characters/bf');
+		boyfriendCutscene.anim.addByFrameLabel("idle", "Idle", 24, false);
+		boyfriendCutscene.anim.play('idle', true);
 		boyfriendCutscene.animation.curAnim.finish();
 		addBehindBF(boyfriendCutscene);
 		cutsceneHandler.push(boyfriendCutscene);
@@ -399,7 +399,7 @@ class Tank extends BaseStage
 
 		cutsceneHandler.timer(20, function()
 		{
-			camFollow.setPosition(dad.x + 500, dad.y + 170);
+			camFollow.setPosition(dad.x + 460, dad.y + 200);
 		});
 
 		cutsceneHandler.timer(31.2, function()
